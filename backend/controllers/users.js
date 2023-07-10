@@ -4,6 +4,8 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 const ValidationError = require('../errors/validation-err');
 const ConflictingRequestError = require('../errors/conflicting-request-err');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const { STATUS_CREATED } = require('../utils/constants');
 
 module.exports.getUsers = async (req, res, next) => {
@@ -94,7 +96,7 @@ module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password);
-    const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
     res.send({ token });
   } catch (err) {
     next(err);
