@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
@@ -18,13 +18,13 @@ mongoose.connect(MONGO_URL)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-// });
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
 app.use(helmet());
-// app.use(limiter);
+app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
