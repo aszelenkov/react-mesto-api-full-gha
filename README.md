@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP 158.160.222.80
+IP 158.160.206.231
 
-Frontend https://aszelenkov.nomoreparties.sbs
+Frontend https://aszelenkov.nomoredomains.work
 
-Backend https://api.aszelenkov.nomoreparties.sbs
+Backend https://api.aszelenkov.nomoredomains.work
