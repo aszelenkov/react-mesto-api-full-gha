@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 export function usePopupClose(isOpen, closePopup) {
   useEffect(() => {
     if (!isOpen) return;
-
     const handleOverlay = (evt) => {
       if (evt.target.classList.contains("popup_opened")) {
         closePopup();
